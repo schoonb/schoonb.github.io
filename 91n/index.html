@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>91n - 轻量级在线工具与实用导航指南</title>
+<meta name="description" content="91n 是一个面向日常办公与学习场景的轻量工具与实用导航页面，整理常用在线工具、格式转换、文本处理与效率资源，帮助你快速找到合适的网络工具并了解使用方法与注意事项。">
+<meta name="keywords" content="91n,在线工具,实用导航,格式转换,文本处理,效率工具,轻量工具">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+  :root{
+    --bg:#f5f7fa;
+    --panel:#ffffff;
+    --ink:#1b2430;
+    --ink-soft:#4a5768;
+    --line:#e2e8f0;
+    --brand:#2f6fed;
+    --brand-deep:#1c4fb8;
+    --accent:#0fa97a;
+    --warn:#b45309;
+    --radius:14px;
+    --shadow:0 6px 24px rgba(24,40,72,.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.75;
+    font-size:16px;
+  }
+  a{color:var(--brand);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{width:min(1160px,92%);margin:0 auto;}
+
+  /* 顶部 */
+  .topbar{
+    background:#101a2b;
+    color:#c8d3e4;
+    font-size:13px;
+    padding:8px 0;
+  }
+  .topbar .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .topbar span{opacity:.85;}
+
+  header.site{
+    background:linear-gradient(135deg,#1c4fb8 0%,#2f6fed 55%,#4f93ff 100%);
+    color:#fff;
+    padding:26px 0 34px;
+  }
+  .head-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .logo{display:flex;align-items:center;gap:12px;}
+  .logo-mark{
+    width:46px;height:46px;border-radius:12px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.4);
+    display:grid;place-items:center;
+    font-weight:700;font-size:19px;letter-spacing:.5px;
+  }
+  .logo-text b{display:block;font-size:20px;letter-spacing:1px;}
+  .logo-text small{font-size:12.5px;opacity:.85;letter-spacing:.4px;}
+  nav.mainnav ul{
+    list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap;
+  }
+  nav.mainnav a{
+    color:#eaf1ff;font-size:14.5px;padding:8px 14px;border-radius:999px;
+    display:inline-block;transition:background .18s;
+  }
+  nav.mainnav a:hover{background:rgba(255,255,255,.16);text-decoration:none;}
+
+  .hero{padding-top:30px;}
+  .hero h1{
+    font-size:clamp(24px,3.4vw,36px);
+    margin:0 0 12px;line-height:1.35;letter-spacing:.5px;
+  }
+  .hero p.lead{
+    max-width:760px;margin:0 0 22px;color:#e6eeff;font-size:16px;
+  }
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:11px 22px;border-radius:999px;font-size:15px;
+    border:1px solid transparent;cursor:pointer;transition:.18s;font-weight:600;
+  }
+  .btn-primary{background:#fff;color:var(--brand-deep);}
+  .btn-primary:hover{background:#e9f0ff;text-decoration:none;}
+  .btn-ghost{border-color:rgba(255,255,255,.6);color:#fff;}
+  .btn-ghost:hover{background:rgba(255,255,255,.15);text-decoration:none;}
+
+  /* 快捷入口 */
+  .quick{position:relative;margin-top:-26px;}
+  .quick-grid{
+    background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .quick-item{
+    border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    background:#fbfcfe;transition:.18s;
+  }
+  .quick-item:hover{border-color:#bcd0f5;background:#f2f7ff;transform:translateY(-2px);}
+  .quick-item b{display:block;font-size:15px;margin-bottom:4px;}
+  .quick-item span{font-size:13px;color:var(--ink-soft);}
+
+  /* 通用区块 */
+  section.block{padding:52px 0 8px;}
+  .sec-head{margin-bottom:22px;}
+  .sec-head h2{
+    font-size:22px;margin:0 0 8px;position:relative;padding-left:14px;
+  }
+  .sec-head h2::before{
+    content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;
+    border-radius:4px;background:var(--brand);
+  }
+  .sec-head p{margin:0;color:var(--ink-soft);font-size:14.5px;max-width:820px;}
+
+  /* 工具卡片 */
+  .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .tool-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;display:flex;flex-direction:column;gap:10px;transition:.18s;
+  }
+  .tool-card:hover{box-shadow:var(--shadow);border-color:#c9d9f7;transform:translateY(-3px);}
+  .tag{
+    align-self:flex-start;font-size:12px;padding:3px 10px;border-radius:999px;
+    background:#eaf1ff;color:var(--brand-deep);font-weight:600;
+  }
+  .tag.green{background:#e6f7f0;color:#0b7a58;}
+  .tag.amber{background:#fdf3e3;color:var(--warn);}
+  .tool-card h3{margin:0;font-size:17px;}
+  .tool-card p{margin:0;font-size:14.5px;color:var(--ink-soft);}
+  .tool-card ul{margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--ink-soft);}
+  .tool-card ul li{margin-bottom:4px;}
+
+  /* 分类导航 */
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .cat-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;transition:.18s;
+  }
+  .cat-card:hover{border-color:#c9d9f7;box-shadow:var(--shadow);}
+  .cat-card h3{margin:0 0 8px;font-size:16px;}
+  .cat-card p{margin:0 0 10px;font-size:14px;color:var(--ink-soft);}
+  .cat-card .links{display:flex;flex-wrap:wrap;gap:8px;}
+  .cat-card .links a{
+    font-size:13px;background:#f2f5fa;border-radius:8px;padding:4px 10px;color:var(--ink-soft);
+  }
+  .cat-card .links a:hover{background:#e6eeff;color:var(--brand-deep);text-decoration:none;}
+
+  /* 指南：两栏 */
+  .guide{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start;}
+  .article-box{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;
+  }
+  .article-box h3{margin:22px 0 8px;font-size:17px;}
+  .article-box h3:first-child{margin-top:0;}
+  .article-box p{margin:0 0 12px;color:#33404f;font-size:15px;}
+  .article-box ol,.article-box ul{margin:0 0 14px;padding-left:22px;color:#33404f;font-size:15px;}
+  .article-box li{margin-bottom:6px;}
+  .aside-box{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;
+  }
+  .aside-box h3{margin:0 0 12px;font-size:16px;}
+  .aside-box ul{list-style:none;margin:0;padding:0;}
+  .aside-box li{
+    padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px;color:var(--ink-soft);
+  }
+  .aside-box li:last-child{border-bottom:none;}
+  .aside-box li b{color:var(--ink);display:block;font-size:14.5px;margin-bottom:2px;}
+
+  /* 安全提示 */
+  .notice{
+    background:#fffaf0;border:1px solid #f3ddb4;border-left:5px solid #e0a83a;
+    border-radius:12px;padding:18px 20px;margin-top:8px;
+  }
+  .notice h3{margin:0 0 8px;font-size:16px;color:#8a5a08;}
+  .notice p,.notice li{font-size:14.5px;color:#6b4a10;}
+  .notice ul{margin:0;padding-left:20px;}
+
+  /* FAQ */
+  .faq{display:grid;gap:12px;}
+  .faq details{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:16px 20px;
+  }
+  .faq summary{
+    cursor:pointer;font-weight:600;font-size:15.5px;list-style:none;
+    display:flex;justify-content:space-between;gap:12px;align-items:center;
+  }
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{
+    content:"+";color:var(--brand);font-size:20px;line-height:1;font-weight:400;
+  }
+  .faq details[open] summary::after{content:"–";}
+  .faq details p{margin:10px 0 0;font-size:14.5px;color:var(--ink-soft);}
+
+  /* 页脚 */
+  footer.site{
+    margin-top:56px;background:#101a2b;color:#9fb0c9;padding:38px 0 22px;font-size:14px;
+  }
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:26px;}
+  footer.site h4{color:#fff;font-size:15px;margin:0 0 12px;}
+  footer.site ul{list-style:none;margin:0;padding:0;}
+  footer.site li{margin-bottom:8px;}
+  footer.site a{color:#9fb0c9;}
+  footer.site a:hover{color:#fff;}
+  .foot-bottom{
+    margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);
+    font-size:13px;color:#7d8ea6;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+
+  @media (max-width:980px){
+    .quick-grid{grid-template-columns:repeat(2,1fr);}
+    .tool-grid{grid-template-columns:repeat(2,1fr);}
+    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .guide{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:620px){
+    body{font-size:15.5px;}
+    .quick-grid{grid-template-columns:1fr;}
+    .tool-grid{grid-template-columns:1fr;}
+    .cat-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    header.site{padding:20px 0 30px;}
+    nav.mainnav ul{gap:2px;}
+    nav.mainnav a{padding:7px 11px;font-size:14px;}
+    .article-box,.aside-box{padding:20px;}
+    section.block{padding:40px 0 4px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>轻量工具与实用导航 · 无需注册即可查看</span>
+    <span>建议使用最新版主流浏览器访问</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap head-row">
+    <div class="logo">
+      <div class="logo-mark">91n</div>
+      <div class="logo-text">
+        <b>91n 工具导航</b>
+        <small>在线工具 · 文本处理 · 效率资源</small>
+      </div>
+    </div>
+    <nav class="mainnav" aria-label="主导航">
+      <ul>
+        <li><a href="#tools">常用工具</a></li>
+        <li><a href="#category">分类导航</a></li>
+        <li><a href="#guide">使用指南</a></li>
+        <li><a href="#safety">安全提示</a></li>
+        <li><a href="#faq">常见问题</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <h1>91n：把日常用得到的在线工具整理到一个页面</h1>
+    <p class="lead">
+      很多人搜索“91n”，其实是想快速找到能用的网络工具入口。这个页面把文本处理、格式转换、
+      编码解码、单位换算等常见需求按场景归类，说明每个工具适合做什么、使用时要注意什么，
+      让你少走弯路，而不是在搜索结果里反复试错。
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#tools">查看常用工具</a>
+      <a class="btn btn-ghost" href="#guide">阅读使用指南</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 快捷入口 -->
+  <div class="wrap quick">
+    <div class="quick-grid">
+      <div class="quick-item">
+        <b>文本处理</b>
+        <span>去重、去空行、大小写转换、字数统计</span>
+      </div>
+      <div class="quick-item">
+        <b>编码转换</b>
+        <span>Base64、URL 编码、Unicode 转义</span>
+      </div>
+      <div class="quick-item">
+        <b>格式整理</b>
+        <span>JSON 格式化、时间戳转换、表格对齐</span>
+      </div>
+      <div class="quick-item">
+        <b>日常换算</b>
+        <span>单位、进制、颜色值、日期差计算</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 常用工具 -->
+  <section class="block" id="tools">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>常用在线工具</h2>
+        <p>下面按使用频率和场景整理了几类工具方向。具体实现方式可能因平台而异，选择时优先看是否本地处理、是否需要上传数据。</p>
+      </div>
+
+      <div class="tool-grid">
+        <article class="tool-card">
+          <span class="tag">文本类</span>
+          <h3>文本清理与去重</h3>
+          <p>适合处理从表格、聊天记录、日志里复制出来的杂乱文本。</p>
+          <ul>
+            <li>删除重复行、空行与首尾空格</li>
+            <li>批量替换、按分隔符拆分合并</li>
+            <li>统计字数、行数与字符类型</li>
+          </ul>
+        </article>
+
+        <article class="tool-card">
+          <span class="tag green">编码类</span>
+          <h3>编码与解码</h3>
+          <p>开发调试、参数拼接、数据搬运时经常需要来回转换。</p>
+          <ul>
+            <li>Base64 编码与解码</li>
+            <li>URL 百分号编码处理</li>
+            <li>Unicode 与中文互转</li>
+          </ul>
+        </article>
+
+        <article class="tool-card">
+          <span class="tag amber">格式类</span>
+          <h3>数据格式化</h3>
+          <p>把压缩成一行的数据还原成可读结构，便于排查问题。</p>
+          <ul>
+            <li>JSON 美化与压缩</li>
+            <li>时间戳与日期互转</li>
+            <li>CSV 与简单表格整理</li>
+          </ul>
+        </article>
+
+        <article class="tool-card">
+          <span class="tag">换算类</span>
+          <h3>单位与进制换算</h3>
+          <p>学习、写作、工程估算中常见的换算需求。</p>
+          <ul>
+            <li>长度、重量、面积、温度</li>
+            <li>二进制、八进制、十六进制</li>
+            <li>存储容量与速率单位</li>
+          </ul>
+        </article>
+
+        <article class="tool-card">
+          <span class="tag green">图片类</span>
+          <h3>图片基础处理</h3>
+          <p>轻量场景下不必安装专业软件，浏览器即可完成。</p>
+          <ul>
+            <li>尺寸缩放与裁剪</li>
+            <li>格式转换与体积压缩</li>
+            <li>取色与颜色值查看</li>
+          </ul>
+        </article>
+
+        <article class="tool-card">
+          <span class="tag amber">效率类</span>
+          <h3>效率辅助工具</h3>
+          <p>把重复操作交给工具，减少手工出错。</p>
+          <ul>
+            <li>随机数与抽签</li>
+            <li>倒计时与番茄钟</li>
+            <li>简单加密与密码生成</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分类导航 -->
+  <section class="block" id="category">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>按场景分类导航</h2>
+        <p>先确定“我要解决什么问题”，再挑工具，通常比直接搜工具名更高效。</p>
+      </div>
+
+      <div class="cat-grid">
+        <div class="cat-card">
+          <h3>写文档 / 做表格</h3>
+          <p>处理文字、统计字数、整理列表、统一格式。</p>
+          <div class="links">
+            <a href="#tools">文本清理</a>
+            <a href="#tools">字数统计</a>
+            <a href="#tools">去重排序</a>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <h3>开发与调试</h3>
+          <p>格式化数据、验证编码、转换时间与进制。</p>
+          <div class="links">
+            <a href="#tools">JSON 格式化</a>
+            <a href="#tools">Base64</a>
+            <a href="#tools">时间戳</a>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <h3>学习与作业</h3>
+          <p>单位换算、公式核对、进制转换、随机分组。</p>
+          <div class="links">
+            <a href="#tools">单位换算</a>
+            <a href="#tools">进制转换</a>
+            <a href="#tools">随机分组</a>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <h3>日常小工具</h3>
+          <p>图片压缩、取色、密码生成、倒计时。</p>
+          <div class="links">
+            <a href="#tools">图片压缩</a>
+            <a href="#tools">取色器</a>
+            <a href="#tools">密码生成</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使用指南 -->
+  <section class="block" id="guide">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>91n 工具使用指南</h2>
+        <p>工具本身不复杂，真正影响体验的是选择顺序和使用习惯。下面几条经验适用于大多数在线工具。</p>
+      </div>
+
+      <div class="guide">
+        <div class="article-box">
+          <h3>一、先明确输入和输出</h3>
+          <p>
+            在打开任何工具之前，先想清楚两件事：你手头的数据是什么格式，希望得到什么格式。
+            例如“把一列手机号去掉重复项并保留顺序”，输入是文本列表，输出仍是文本列表，
+            那么只需要去重功能，不需要格式转换。目标越具体，越不容易被花哨的功能干扰。
+          </p>
+
+          <h3>二、优先选择在本地完成的工具</h3>
+          <p>
+            涉及通讯录、客户名单、内部文档、代码片段等内容时，尽量选择在浏览器本地完成计算、
+            不需要把数据上传到服务器的工具。判断方法很简单：关闭网络后如果功能仍能正常使用，
+            通常说明处理过程发生在本地。反之，如果断网立刻失效，就要谨慎对待敏感内容。
+          </p>
+
+          <h3>三、小批量先验证，再批量处理</h3>
+          <ol>
+            <li>先取三到五条代表性数据试跑，确认结果符合预期。</li>
+            <li>检查边界情况，比如空行、特殊符号、超长文本。</li>
+            <li>确认无误后再粘贴完整数据，避免反复返工。</li>
+            <li>处理完先复制到临时文件核对，再覆盖原始数据。</li>
+          </ol>
+
+          <h3>四、保留原始数据</h3>
+          <p>
+            任何批量替换、格式转换、编码解码操作都可能产生不可逆的结果。
+            建议在操作前把原始内容另存一份，或者先复制到新文件里再处理。
+            这一步只需要几秒钟，却能在出现意外时省下大量重新整理的时间。
+          </p>
+
+          <h3>五、注意字符编码与换行符差异</h3>
+          <p>
+            从不同系统复制来的文本，换行符可能是 \n 也可能是 \r\n，中文还可能遇到 GBK 与 UTF-8 的差异。
+            如果发现工具处理结果出现乱码或多余空行，先检查编码设置和换行符选项，
+            多数“工具不好用”的情况其实出在这一步。
+          </p>
+
+          <h3>六、把常用工具固定下来</h3>
+          <p>
+            与其每次重新搜索，不如把确实顺手的几个工具加入浏览器书签，按用途分文件夹保存。
+            长期来看，稳定的工具组合比不断尝试新工具更能提升效率。
+          </p>
+        </div>
+
+        <aside class="aside-box">
+          <h3>选择工具时的检查清单</h3>
+          <ul>
+            <li><b>是否本地处理</b>断网后能否继续使用</li>
+            <li><b>是否需要登录</b>不登录能否完成核心功能</li>
+            <li><b>是否有广告干扰</b>弹窗、跳转是否影响操作</li>
+            <li><b>结果是否可导出</b>能否复制或下载处理结果</li>
+            <li><b>页面是否简洁</b>功能入口是否一目了然</li>
+            <li><b>是否说明限制</b>有无文件大小、条数上限提示</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 安全提示 -->
+  <section class="block" id="safety">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>安全与隐私提示</h2>
+        <p>在线工具方便，但也需要基本的安全意识。以下内容不针对任何特定网站，属于通用建议。</p>
+      </div>
+
+      <div class="notice">
+        <h3>使用前请留意这几点</h3>
+        <ul>
+          <li>不要向来源不明的工具提交身份证号、银行卡号、账号密码等敏感信息。</li>
+          <li>涉及公司内部资料时，优先使用公司允许的工具或本地软件处理。</li>
+          <li>对要求下载安装客户端的工具保持谨慎，先确认来源是否可靠。</li>
+          <li>遇到强制跳转、频繁弹窗或要求关闭安全软件的页面，建议直接离开。</li>
+          <li>处理完成后及时清理剪贴板和临时文件中的敏感内容。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>常见问题</h2>
+        <p>整理了几个和“91n”这类工具导航相关的高频疑问。</p>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>“91n”具体指什么？</summary>
+          <p>
+            这个关键词在不同语境下可能指向不同内容。本页面把它作为“轻量在线工具与实用导航”的主题来处理，
+            重点介绍日常会用到的文本、编码、格式、换算类工具，以及挑选和使用它们的方法。
+            如果你搜索的是其他含义，建议结合具体场景进一步确认。
+          </p>
+        </details>
+
+        <details>
+          <summary>在线工具处理数据安全吗？</summary>
+          <p>
+            取决于工具的实现方式。如果处理过程完全在浏览器本地完成，数据不会离开你的设备，相对更安全；
+            如果需要上传到服务器，就应避免提交敏感内容。判断方法可以看断网后功能是否仍然可用。
+          </p>
+        </details>
+
+        <details>
+          <summary>为什么同样的文本在不同工具里结果不一样？</summary>
+          <p>
+            常见原因包括字符编码不同、换行符处理方式不同、是否忽略大小写、是否保留空行等。
+            使用前先看清选项说明，必要时用小批量数据对比结果。
+          </p>
+        </details>
+
+        <details>
+          <summary>有没有必要为这类工具付费？</summary>
+          <p>
+            日常轻量需求通常用免费工具就能满足。如果涉及批量处理、自动化流程或团队协作，
+            再考虑是否需要更专业的软件或服务，不必一开始就投入成本。
+          </p>
+        </details>
+
+        <details>
+          <summary>工具处理结果出错了怎么办？</summary>
+          <p>
+            先检查输入数据是否包含特殊字符或格式异常，再确认选项设置是否正确。
+            如果仍然不对，可以换一个工具交叉验证。重要数据务必保留原始副本，避免覆盖后无法恢复。
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>关于本页</h4>
+        <p style="margin:0;color:#9fb0c9;">
+          本页面围绕“91n”这一关键词，整理轻量在线工具的使用思路与选择建议，
+          内容以通用经验为主，不针对任何特定平台做背书。
+        </p>
+      </div>
+      <div>
+        <h4>内容导航</h4>
+        <ul>
+          <li><a href="#tools">常用工具</a></li>
+          <li><a href="#category">分类导航</a></li>
+          <li><a href="#guide">使用指南</a></li>
+          <li><a href="#safety">安全提示</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>使用建议</h4>
+        <ul>
+          <li>敏感数据优先本地处理</li>
+          <li>批量操作前先备份原始内容</li>
+          <li>小批量验证后再全量执行</li>
+          <li>遇到异常页面及时离开</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2024 91n 工具导航 · 内容仅供学习与参考</span>
+      <span>请遵守当地法律法规与网络使用规范</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 平滑定位时给目标区块留出顶部空间
+  document.querySelectorAll('a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var id = this.getAttribute('href');
+      if(id.length < 2) return;
+      var target = document.querySelector(id);
+      if(!target) return;
+      e.preventDefault();
+      var top = target.getBoundingClientRect().top + window.pageYOffset - 16;
+      window.scrollTo({top: top, behavior: 'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
